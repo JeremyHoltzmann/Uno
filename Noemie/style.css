@@ -1,0 +1,90 @@
+.body {
+    height: 100vh;
+    margin: 0px;
+
+}
+
+#allCards {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: darkgrey;
+}
+
+#myCards {
+    display: flex;
+    justify-content: center;
+    margin: 100px;
+}
+
+.recto {
+    border: solid 20px white;
+    border-radius: 10%;
+    height: 250px;
+    width: 150px;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 10px 5px 10px black;
+}
+
+.recto .ovale {
+    height: 150px;
+    width: 90px;
+    border-radius: 70%;
+    background-color: white;
+    padding: 30px;
+    text-align: center;
+    transform: rotate(20deg);
+    display: flex;
+    align-items: center;
+}
+
+.chiffre {
+    transform: rotate(-20deg);
+    font-size: 90px;
+    padding-left: 20px;
+    padding-top: 15px;
+    font-weight: bold;
+    text-shadow: 3px 3px 3px black;
+}
+
+.bleu {
+    background-color: lightskyblue;
+    color: lightskyblue;
+}
+
+.rouge {
+    background-color: lightcoral;
+    color: lightcoral;
+}
+
+.vert {
+    background-color: lightseagreen;
+    color: lightseagreen;
+}
+
+.jaune {
+    background-color:gold;
+    color: gold;
+}
+
+.verso {
+border: solid 20px black;
+border-radius: 10%;
+height: 250px;
+width: 150px;
+margin: 20px;
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: black;
+color:lightcoral;
+font-size: 55px;
+}
+
+.playable {
+    box-shadow: 10px 5px 10px lightgreen;
+}
