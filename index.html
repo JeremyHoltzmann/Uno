@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>UNO</title>
 
-    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="style.css" />
 
 </head>
+
 <body>
     <div class="gameArea">
-        <div class="decks">
-            <div class="drawingDeck">
-                <p>drawingDeck</p>
+        <div id="upGame">
+            <div class="decks">
+                <div class="drawingDeck">
+                    <p>Drawing Deck</p>
+                    <p class="card verso">UNO</p>
+                </div>
+                <div class="playedDeck">
+                    <p>Played Deck</p>
+                </div>
             </div>
-            <div class="playedDeck">
-                <p>Played Deck</p>
+            <div id="scoresTable">
             </div>
         </div>
         <div class="playersHands">
@@ -26,4 +33,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

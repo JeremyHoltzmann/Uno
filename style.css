@@ -1,76 +1,134 @@
-.gameArea
-{
+.body {
+    height: 100vh;
+    margin: 0px;
+}
+
+.gameArea {
     display: flex;
     flex-direction: column;
-
-    border-style: solid;
-    border-radius: 10px;
-    border-color: aqua;
-
-    width: 100%;
-
+    justify-content: center;
     align-items: center;
-    justify-items: center;
+    background-color: wheat;
+    margin: 0px;
 }
 
-
-.decks{
-    display: flex;
-
-    border-style: solid;
-    border-radius: 10px;
-    border-color: red;
-
-    width: 100%;
-
-    justify-content: space-between;
+#upGame {
+    display: flex
 }
 
-.drawingDeck{
-    border-style: solid;
-    border-radius: 10px;
-    border-color: aquamarine;
-
-    justify-items: center;
-    align-items: center;
-
-    width: 50%;
-}
-
-.playedDeck{
-    border-style: solid;
-    border-radius: 10px;
-    border-color:crimson;
-
-    width: 50%;
-}
-
-.playersHands{
-    display: flex;
-
-    flex-direction: column;
-    border-style: solid;
-    border-radius: 10px;
-    border-color: green;
-
-    width: 50%;
-}
-.playerHand
-{
+.decks {
     display: flex;
     flex-direction: row;
-
-    height: 50px;
-
-    justify-content: space-evenly;
-    align-content: center;
-
-    margin: 10px;
+    justify-content: space-between;
+    align-items: center;
 }
 
+.drawingDeck {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 50px;
+}
 
-.card {
-    border-style: solid;
-    border-width: 2px;
-    border-color: blueviolet;
+.playedDeck {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 50px;
+}
+
+.recto {
+    border: solid 20px white;
+    border-radius: 10%;
+    height: 250px;
+    width: 150px;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 10px 5px 10px black;
+    position: relative;
+}
+
+.ovale {
+    height: 150px;
+    width: 90px;
+    border-radius: 70%;
+    background-color: white;
+    padding: 30px;
+    text-align: center;
+    transform: rotate(20deg);
+    position: absolute;
+    z-index: 1;
+}
+
+.chiffre {
+    font-size: 90px;
+    padding-left: 20px;
+    padding-top: 15px;
+    font-weight: bold;
+    text-shadow: 3px 3px 3px black;
+    position: absolute;
+    z-index: 2;
+    padding: 0;
+}
+
+.bleu {
+    background-color: lightskyblue;
+    color: lightskyblue;
+}
+
+.rouge {
+    background-color: lightcoral;
+    color: lightcoral;
+}
+
+.vert {
+    background-color: lightseagreen;
+    color: lightseagreen;
+}
+
+.jaune {
+    background-color: gold;
+    color: gold;
+}
+
+.verso {
+    border: solid 20px black;
+    border-radius: 10%;
+    height: 250px;
+    width: 150px;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: lightcoral;
+    font-size: 55px;
+    box-shadow: 10px 5px 10px darkgray;
+    font-family: Arial, Helvetica, sans-serif;
+    text-shadow: 3px 3px 3px rgb(247, 192, 192);
+}
+
+.playable {
+    box-shadow: 10px 5px 10px lightgreen;
+}
+
+.playerHand {
+    display: flex;
+}
+
+#scoresTable {
+    padding-left: 300px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.playing {
+    font-weight: bold;
+}
+
+p {
+    font-family: 'Courier New', Courier, monospace
 }

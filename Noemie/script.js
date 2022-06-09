@@ -1,9 +1,3 @@
-function mod(n, m) {
-    return ((n % m) + m) % m;
-}
-
-
-
 var gameState = {
     numberOfPlayer: 3,
     numberOfCardToGive: 7,
@@ -217,9 +211,9 @@ function renderPlay() {
     // ---- Render updateCardPlayed ----
 
     var playedCard = document.getElementById('currentPlayedCard');
-    playedCard.classList.remove(gameState.lastCardPlayed[0].color);
+    playedCard.classList.remove(gameState.lastCardPlayed[0].color); // a mettre au moment du clic, avant d'update la lastCardPlayed
     playedCard.classList.add(gameState.lastCardPlayed[0].color);
-    playedCard.textContent = gameState.lastCardPlayed[0].n
+    playedCard.textContent = gameState.lastCardPlayed[0].number;
 
 
     // ---- Render playableCards ----

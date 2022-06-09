@@ -1,0 +1,77 @@
+.gameArea
+{
+    display: flex;
+    flex-direction: column;
+
+    border-style: solid;
+    border-radius: 10px;
+    border-color: aqua;
+
+    width: 100%;
+
+    align-items: center;
+    justify-items: center;
+}
+
+
+.decks{
+    display: flex;
+
+    border-style: solid;
+    border-radius: 10px;
+    border-color: red;
+
+    width: 100%;
+
+    justify-content: space-between;
+}
+
+.drawingDeck{
+    border-style: solid;
+    border-radius: 10px;
+    border-color: aquamarine;
+
+    justify-items: center;
+    align-items: center;
+
+    width: 50%;
+}
+
+.playedDeck{
+    border-style: solid;
+    border-radius: 10px;
+    border-color:crimson;
+
+    width: 50%;
+}
+
+.playersHands{
+    display: flex;
+
+    flex-direction: column;
+    border-style: solid;
+    border-radius: 10px;
+    border-color: green;
+
+    width: 50%;
+}
+.playerHand
+{
+    display: flex;
+    flex-direction: row;
+
+    height: 50px;
+
+    justify-content: space-evenly;
+    align-content: center;
+
+    margin: 10px;
+}
+
+
+.card {
+    border-style: solid;
+    border-width: 2px;
+    border-color: blueviolet;
+}
+
