@@ -128,42 +128,6 @@ function drawCard(numberOfCardToDraw) {
     return gameState.drawingDeck.splice(0, numberOfCardToDraw);
 }
 
-
-
-function addClickEventListenerToCard() {
-    console.log("Player " + gameState.currentPlayerIndex);
-    var cards = document.getElementById("Player " + gameState.currentPlayerIndex);
-    for (var i = 0; i < cards.children.length; i++) {
-        //findPlayableCards
-        //Sinon Update DrawDeck
-
-        cards.children[i].addEventListener("click", function () {
-            gameState.currentPlayerIndex += gameState.playingDirection;
-
-            gameState.currentPlayerIndex = gameState.currentPlayerIndex % gameState.players.length;
-            if (gameState.currentPlayerIndex == -1) {
-                gameState.currentPlayerIndex = (gameState.currentPlayerIndex * gameState.players.length * -1) - 1;
-            }
-
-            //playCards
-
-            render();
-        })
-    }
-    //A refaire en une boucle
-    for (var j = 0; j < gameState.players.length; j++) {
-        //remove event from drawDeck
-
-        if (j == gameState.currentPlayerIndex)
-            continue;
-        var card = document.getElementById("Player " + gameState.currentPlayerIndex);
-        for (var k = 0; k < card.children.length; k++) {
-            cards.children[k].removeEventListener("click", this);
-        }
-    }
-}
-
-
 function playerTurn() {
     var currentPlayerIndex = gameState.currentPlayerIndex % (gameState.players.length);
     var currentPlayer = gameState.players[currentPlayerIndex];
@@ -202,56 +166,46 @@ function play() {
 function renderInit() {
     // ---- Render addPlayer & generateInitialCards ----
 
+    var scoresTableDom = $("#scoresTable");
+
+    scoresTableDom.empty();
+
     for (var i = 0; i < gameState.numberOfPlayer; i++) {
 
-        var scoresTable = document.getElementById("scoresTable");
-
-        var playersScores = document.createElement("p");
         var playerScore = gameState.players[i].cards.length;
-        playersScores.textContent = `Player ${i} : ${playerScore} cards left`;
 
-        scoresTable.appendChild(playersScores);
+        var scores =
+            `
+        <p> Player ${i + 1} : ${playerScore} cards left
+        `
 
-
+        var playersScores = scoresTableDom.append(scores)
 
         if (currentPlayerIndex == i) {
 
-            playersScores.classList.add("playing")
+            playersScores.children().eq(i).addClass("playing")
 
-            var playersDom = document.getElementsByClassName("playersHands");
+            var playerHand =
+                `
+            <p> Player ${i + 1} </p>
+            <div class="playerHand" id="Player ${i}"></div>
+            `
 
-            var playerNumberDom = document.createElement("p");
-            playerNumberDom.textContent = "Player " + i;
-            playersDom[0].appendChild(playerNumberDom);
-
-            var newPlayerDom = document.createElement("div");
-            newPlayerDom.classList.add("playerHand")
-            newPlayerDom.setAttribute("id", "Player " + i);
-            playersDom[0].appendChild(newPlayerDom);
-
+            $(".playersHands").append(playerHand)
 
             var player = gameState.players[i];
 
             for (var j = 0; j < player.cards.length; j++) {
-                var cardDom2 = document.createElement("p");
 
-                cardDom2.classList.add(player.cards[j].color);
-                cardDom2.classList.add("card");
-                cardDom2.classList.add("recto");
+                var cardPlayerHand =
+                    `
+                <p class="card recto ${player.cards[j].color}">
+                <span class="ovale"></span>
+                <span class="chiffre">${player.cards[j].number}</span>
+                </p>
+                `
 
-                var cardId = player.playerOrder * gameState.numberOfPlayer + j;
-                cardDom2.setAttribute("id", cardId);
-
-                document.getElementById("Player " + player.playerOrder).appendChild(cardDom2);
-
-                var ovale = document.createElement("span");
-                ovale.classList.add("ovale");
-                cardDom2.appendChild(ovale);
-
-                var chiffre = document.createElement("span");
-                chiffre.classList.add("chiffre");
-                chiffre.textContent = player.cards[j].number
-                cardDom2.prepend(chiffre);
+                $(".playerHand").append(cardPlayerHand)
 
             }
 
@@ -260,25 +214,16 @@ function renderInit() {
     }
 
     // ---- Render InitPlayedCard ----
-    var initPlayedCard = document.querySelector(".playedDeck");
 
-    var cardDom3 = document.createElement("p");
+    $("#playedDeck").append(
+        `
+        <p class="card recto ${gameState.lastCardPlayed[0].color}" id="currentPlayedCard">
+        <span class="ovale"></span>
+        <span class="chiffre">${gameState.lastCardPlayed[0].number}</span>
+        </p>
+        `
+    )
 
-    cardDom3.classList.add("card");
-    cardDom3.classList.add("recto");
-    cardDom3.setAttribute("id", "currentPlayedCard");
-    cardDom3.classList.add(gameState.lastCardPlayed[0].color);
-
-    initPlayedCard.appendChild(cardDom3);
-
-    var ovalePlayedCard = document.createElement("span");
-    ovalePlayedCard.classList.add("ovale");
-    cardDom3.appendChild(ovalePlayedCard);
-
-    var chiffrePlayedCard = document.createElement("span");
-    chiffrePlayedCard.classList.add("chiffre");
-    chiffrePlayedCard.textContent = gameState.lastCardPlayed[0].number;
-    cardDom3.prepend(chiffrePlayedCard);
 
 }
 
@@ -305,13 +250,36 @@ async function main() {
 
     initGame();
     renderInit();
-    while (!play()) {
-        render();
-        await new Promise(r => setTimeout(r, 2000));
-        //     // while((gameState.playerHasToPlay || gameState.playerHasToDraw));
-    }
-    render();
+
     return true;
 }
+
+$(".playersHands").on("click", ".card", function () {
+    console.log(gameState.players[gameState.currentPlayerIndex].cards);
+    var playedCardColor = $(this).attr("class").split(' ').filter(element => element == 'rouge' || element == 'vert' || element == 'bleu' || element == 'jaune')
+
+
+    var playedCardNumber = $(this).children().last().text();
+
+
+    var indexPlayedCard = gameState.players[gameState.currentPlayerIndex].cards.findIndex(element => element.color == playedCardColor && element.number == playedCardNumber);
+    gameState.players[gameState.currentPlayerIndex].cards.splice(indexPlayedCard, 1);
+
+    //changer valeur PlayedCard dans PlayedDeck
+
+    gameState.currentPlayerIndex += gameState.playingDirection;
+
+    gameState.currentPlayerIndex = gameState.currentPlayerIndex % gameState.players.length;
+    if (gameState.currentPlayerIndex == -1) {
+        gameState.currentPlayerIndex = (gameState.currentPlayerIndex * gameState.players.length * -1) - 1;
+    }
+
+});
+
+$(".drawingDeck").on("click", ".playable", function () {
+    gameState.players[gameState.currentPlayerIndex].cards.push(drawCard(1));
+    renderInit();
+
+});
 
 main();
